@@ -4,7 +4,8 @@ ARG JAR_FILE=target/*.jar
 COPY ${JAR_FILE} application.jar
 RUN java -Djarmode=layertools -jar application.jar extract
 
-FROM adoptopenjdk:11-jre-hotspot
+#FROM adoptopenjdk:11-jre-hotspot
+FROM gcr.io/distroless/java:11
 WORKDIR application
 COPY --from=builder application/dependencies/ ./
 COPY --from=builder application/snapshot-dependencies/ ./
